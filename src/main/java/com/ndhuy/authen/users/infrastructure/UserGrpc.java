@@ -8,6 +8,8 @@ import com.ndhuy.proto_library.user.UserServiceGrpc;
 
 import net.devh.boot.grpc.client.inject.GrpcClient;
 
+
+
 @Service
 public class UserGrpc {
     
