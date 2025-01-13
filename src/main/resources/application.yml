@@ -1,4 +1,6 @@
 spring:
+    main:
+        allow-bean-definition-overriding: true 
     application:
         name: authen
     data:
@@ -7,5 +9,10 @@ spring:
                 enabled: true
             host: localhost
             port: 6379
-
+grpc:
+    client:
+        user-service:
+            address: localhost:7091
+            negotiationType: plaintext
+        enabled: true
 
