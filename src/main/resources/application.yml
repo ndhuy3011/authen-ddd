@@ -1,4 +1,7 @@
+server:
+  port: 9092
 spring:
+
     main:
         allow-bean-definition-overriding: true 
     application:
@@ -14,5 +17,5 @@ grpc:
         user-service:
             address: localhost:7091
             negotiationType: plaintext
-        enabled: true
-
+    server:
+        port: 7092
