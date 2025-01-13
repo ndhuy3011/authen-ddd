@@ -1,4 +1,4 @@
-package com.ndhuy.authen.users.infrastructure;
+package com.ndhuy.authen.users.infrastructure.grpcs;
 
 import org.springframework.stereotype.Service;
 
@@ -11,12 +11,12 @@ import net.devh.boot.grpc.client.inject.GrpcClient;
 
 
 @Service
-public class UserGrpc {
+public class UserCommunicateGrpc {
     
     @GrpcClient("user-service")
     private UserServiceGrpc.UserServiceBlockingStub userServiceStub;
     
-    public void authenticate(String username, String password) {
+    public AuthResponse authenticate(String username, String password) {
         AuthRequest request = AuthRequest.newBuilder()
                 .setUsername(username)
                 .setPassword(password)
@@ -24,6 +24,6 @@ public class UserGrpc {
 
         AuthResponse response = userServiceStub.authenticate(request);
 
-        System.out.println("Response: " + response);
+        return response;
     }
 }
