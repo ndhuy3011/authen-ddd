@@ -1,0 +1,13 @@
+version: '3.8'  # Hoặc phiên bản Docker Compose mà bạn muốn sử dụng
+services:
+  redis:
+    image: redis:latest  # Sử dụng phiên bản Redis mới nhất
+    container_name: redis-container  # Tên container
+    ports:
+      - "6379:6379"  # Map cổng 6379 của container ra ngoài
+    volumes:
+      - redis_data:/data  # Lưu trữ dữ liệu Redis trên volume
+    command: ["redis-server", "--appendonly", "yes"]  # Kích hoạt chế độ lưu trữ dữ liệu
+
+volumes:
+  redis_data:  # Tạo volume để lưu trữ dữ liệu Redis
