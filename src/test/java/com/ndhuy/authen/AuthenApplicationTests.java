@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.ndhuy.authen.users.infrastructure.grpcs.UserCommunicateGrpc;
+import com.ndhuy.authen.users.infrastructure.event.UserCommunicateGrpc;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

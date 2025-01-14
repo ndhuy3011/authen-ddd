@@ -1,4 +1,4 @@
-package com.ndhuy.authen.users.infrastructure.grpcs;
+package com.ndhuy.authen.users.infrastructure.event;
 
 import org.springframework.stereotype.Service;
 
