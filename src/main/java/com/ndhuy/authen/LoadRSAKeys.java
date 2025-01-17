@@ -8,9 +8,11 @@ import java.security.PublicKey;
 import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.interfaces.RSAPublicKey;
 
+import com.nimbusds.jose.jwk.RSAKey;
+
 public class LoadRSAKeys {
 
-    private static KeyPair keyPair;
+    private  static KeyPair keyPair;
 
     static {
         try {
@@ -26,6 +28,11 @@ public class LoadRSAKeys {
         
     }
 
+    public static RSAKey getRsaKey(){
+        return new com.nimbusds.jose.jwk.RSAKey.Builder(getRSAPublicKey())
+        .privateKey(getRSAPrivateKey()) 
+        .build();
+    }
     public static PrivateKey getPrivateKey() {
         return keyPair.getPrivate();
     }
