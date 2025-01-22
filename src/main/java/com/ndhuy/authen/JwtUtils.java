@@ -1,5 +1,7 @@
 package com.ndhuy.authen;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.UUID;
 
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -16,11 +18,11 @@ public class JwtUtils {
     private JwtEncoder jwtEncoder;
     public static String generatorJWT( UUID uuid) {
     
-
         var claim = JwtClaimsSet.builder()
         .id(uuid.toString())
-        .expiresAt(null)
-        .issuedAt(null)
+        .claim("device","mobile")
+        .expiresAt(Instant.now().plus(Duration.ofHours(1L)))
+        .issuedAt(Instant.now())
         .build();
 
         var param = JwtEncoderParameters.from( claim);
