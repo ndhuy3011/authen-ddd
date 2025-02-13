@@ -1,7 +1,5 @@
 package com.ndhuy.authen.divice.application.command;
 
-import lombok.Setter;
-
 import java.util.UUID;
 
 

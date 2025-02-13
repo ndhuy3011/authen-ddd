@@ -1,15 +1,17 @@
 package com.ndhuy.authen.users.infrastructure.persistence;
 
+import java.util.UUID;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.ndhuy.authen.JwtUtils;
 import com.ndhuy.authen.users.application.command.JwtCommand;
 import com.ndhuy.authen.users.application.command.UsernameAndPassword;
 import com.ndhuy.authen.users.infrastructure.communicate.UserCommunicateGrpc;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.UUID;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
