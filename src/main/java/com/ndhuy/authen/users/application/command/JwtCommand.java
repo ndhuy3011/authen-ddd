@@ -1,4 +1,6 @@
 package com.ndhuy.authen.users.application.command;
 
-public record JwtCommand() {
+import java.util.UUID;
+
+public record JwtCommand(String token, UUID uuid) {
 }

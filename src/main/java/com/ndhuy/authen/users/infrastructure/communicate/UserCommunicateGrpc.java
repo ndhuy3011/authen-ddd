@@ -1,4 +1,4 @@
-package com.ndhuy.authen.users.infrastructure.event;
+package com.ndhuy.authen.users.infrastructure.communicate;
 
 import org.springframework.stereotype.Service;
 

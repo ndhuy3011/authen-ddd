@@ -1,4 +1,4 @@
-package com.ndhuy.authen.users.domain;
+package com.ndhuy.authen.divice.domain;
 
 import org.springframework.data.repository.CrudRepository;
 

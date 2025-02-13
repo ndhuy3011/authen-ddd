@@ -1,4 +1,11 @@
 package com.ndhuy.authen.divice.application.command;
 
-public record DevicesJwt() {
+import lombok.Setter;
+
+import java.util.UUID;
+
+
+public record DevicesJwt(String ip, String nameDevices, String jwt, String os, String osVersion, UUID uuid) {
+
+
 }
