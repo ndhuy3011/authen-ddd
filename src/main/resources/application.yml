@@ -1,17 +1,15 @@
 server:
   port: 9092
 spring:
+  application:
+    name: authen
+  redis:
+    host: localhost
+    port: 6379
+  main:
+      allow-bean-definition-overriding: true
 
-    main:
-        allow-bean-definition-overriding: true 
-    application:
-        name: authen
-    data:
-        redis:
-            repositories:
-                enabled: true
-            host: localhost
-            port: 6379
+
 grpc:
     client:
         user-service:
