@@ -16,10 +16,11 @@ public class AuthenticantionService {
     RegisterDivices registerDivices;
     @Resource
     AuthenticationJwt authenticationJwt;
-   public JwtAuthenticationCommnad authenticationLogin(AuthenticationCommand authenticationCommand){
+
+    public JwtAuthenticationCommnad authenticationLogin(AuthenticationCommand authenticationCommand) {
         var token = authenticationJwt.getJwt(authenticationCommand.usernameAndPassword());
         var divece = authenticationCommand.divece();
-        registerDivices.registerDivice(divece,token.token(),token.uuid());
+        registerDivices.registerDivice(divece, token.token(), token.uuid());
         return new JwtAuthenticationCommnad(token.token());
     }
 

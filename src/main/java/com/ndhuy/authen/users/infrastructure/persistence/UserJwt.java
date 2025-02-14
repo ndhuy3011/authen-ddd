@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.ndhuy.authen.JwtUtils;
+import com.ndhuy.authen.security.utils.JwtUtils;
 import com.ndhuy.authen.users.application.command.JwtCommand;
 import com.ndhuy.authen.users.application.command.UsernameAndPassword;
 import com.ndhuy.authen.users.infrastructure.communicate.UserCommunicateGrpc;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class AuthenticationJwt {
+public class UserJwt {
 
     @Resource
     UserCommunicateGrpc userCommunicateGrpc;

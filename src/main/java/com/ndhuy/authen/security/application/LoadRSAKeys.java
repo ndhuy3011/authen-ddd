@@ -1,4 +1,4 @@
-package com.ndhuy.authen;
+package com.ndhuy.authen.security.application;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;

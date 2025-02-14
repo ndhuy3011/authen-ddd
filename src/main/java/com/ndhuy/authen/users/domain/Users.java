@@ -16,7 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Users {
+
     @Id
+    String jwt;
+
     UUID id;
 
     String email;
