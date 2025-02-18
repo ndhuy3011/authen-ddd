@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -32,39 +33,42 @@ public class UserJwt {
 
     @Resource
     JwtDecoder jwtDecoder;
-    public JwtCommand getJwt(UsernameAndPassword usernameAndPassword) {
 
-        var user  = userCommunicateGrpc.authenticate(usernameAndPassword.username(),usernameAndPassword.password());
-        if(Objects.isNull(user)){
-             throw new BadCredentialsException("Authen");
-        }
+
+    public JwtCommand getJwt(UsernameAndPassword usernameAndPassword) {
+        var user = Optional.ofNullable(userCommunicateGrpc.authenticate(
+                        usernameAndPassword.username(), usernameAndPassword.password()))
+                .orElseThrow(() -> new BadCredentialsException("Authen"));
         var uuid = UUID.fromString(user.getUuid());
-        var token = generatorJWT(uuid);
-        return new JwtCommand(token,uuid);
+        return new JwtCommand(generatorJWT(uuid), uuid);
     }
 
     public String generatorJWT(UUID uuid) {
-
-        var claim = JwtClaimsSet.builder()
+        var now = Instant.now();
+        var claims = JwtClaimsSet.builder()
                 .id(uuid.toString())
                 .claim("device", "mobile")
-                .expiresAt(Instant.now().plus(Duration.ofHours(1L)))
-                .issuedAt(Instant.now())
+                .issuedAt(now)
+                .expiresAt(now.plus(Duration.ofHours(1)))
                 .build();
 
-        var param = JwtEncoderParameters.from(claim);
-        return jwtEncoder.encode(param).getTokenValue();
+        return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
     public  Map<String, Object> parseJWT(String token) {
         return jwtDecoder.decode(token).getClaims();
     }
 
-    public  UUID getUUIDFromJWT(String token) {
-        return UUID.fromString((String) parseJWT(token).get("jti"));
+    public UUID getUUIDFromJWT(String token) {
+        return Optional.ofNullable(parseJWT(token).get("jti"))
+                .map(Object::toString)
+                .map(UUID::fromString)
+                .orElse(null);
     }
 
-    public  String getDeviceFromJWT(String token) {
-        return (String) parseJWT(token).get("device");
+    public String getDeviceFromJWT(String token) {
+        return Optional.ofNullable(parseJWT(token).get("device"))
+                .map(Object::toString)
+                .orElse(null);
     }
 
     public  Instant getIssuedAtFromJWT(String token) {
@@ -75,12 +79,17 @@ public class UserJwt {
         return (Instant) parseJWT(token).get("exp");
     }
 
-    public  Boolean isExpired(String token) {
-        return getExpiresAtFromJWT(token).isBefore(Instant.now());
+    public Boolean isExpired(String token) {
+        return Optional.ofNullable(getExpiresAtFromJWT(token))
+                .map(exp -> exp.isBefore(Instant.now()))
+                .orElse(true);
     }
-
-    public  Boolean validateToken(String token, UUID uuid) {
-        return uuid.equals(getUUIDFromJWT(token)) && isNotExpired(token);
+    public Boolean validateToken(String token, UUID uuid) {
+        return Optional.ofNullable(token)
+                .filter(this::isNotExpired)
+                .map(this::getUUIDFromJWT)
+                .filter(uuid::equals)
+                .isPresent();
     }
 
     public  Boolean isNotExpired(String token) {

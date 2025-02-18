@@ -15,15 +15,13 @@ public class UserCommunicateGrpc {
     
     @GrpcClient("user-service")
     private UserServiceGrpc.UserServiceBlockingStub userServiceStub;
-    
+
     public AuthResponse authenticate(String username, String password) {
-        AuthRequest request = AuthRequest.newBuilder()
+        var request = AuthRequest.newBuilder()
                 .setUsername(username)
                 .setPassword(password)
                 .build();
-
-        AuthResponse response = userServiceStub.authenticate(request);
-
-        return response;
+        return userServiceStub.authenticate(request);
     }
+
 }

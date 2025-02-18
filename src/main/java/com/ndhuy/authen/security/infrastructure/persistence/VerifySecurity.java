@@ -8,6 +8,8 @@ import com.ndhuy.authen.users.infrastructure.persistence.FindUser;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 public class VerifySecurity {
@@ -17,11 +19,14 @@ public class VerifySecurity {
     private UserJwt userJwt;
 
     public boolean verify(String authorizationHeader) {
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            var jwt = authorizationHeader.substring(7);
-            var user = findUser.findUser(jwt);
-            return userJwt.validateToken(jwt, user.getId());
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            return false;
         }
-        return false;
+
+        var jwt = authorizationHeader.substring(7);
+        return Optional.ofNullable(findUser.findUser(jwt))
+                .map(user -> userJwt.validateToken(jwt, user.getId()))
+                .orElse(false);
     }
+
 }
