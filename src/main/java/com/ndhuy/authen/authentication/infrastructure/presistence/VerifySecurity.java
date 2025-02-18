@@ -1,4 +1,4 @@
-package com.ndhuy.authen.security.infrastructure.persistence;
+package com.ndhuy.authen.authentication.infrastructure.presistence;
 
 import com.ndhuy.authen.users.infrastructure.persistence.UserJwt;
 import org.springframework.stereotype.Service;

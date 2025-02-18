@@ -13,21 +13,18 @@ import java.util.UUID;
 @Slf4j
 public class RegisterDivices {
 
-
     @Resource
     DevicesRepository devicesRepository;
 
     public void registerDivice(DevicesJwt devices, String jwt, UUID uuid
     ){
-
-    var divices = Devices.builder()
+    devicesRepository.save( Devices.builder()
             .jwt(jwt)
             .id(uuid)
             .deviceId(devices.nameDevices())
             .os(devices.os())
             .osVersion(devices.osVersion())
-            .build();
-    devicesRepository.save(divices);
+            .build());
 
     }
 }

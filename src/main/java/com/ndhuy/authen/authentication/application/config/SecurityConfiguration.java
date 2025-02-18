@@ -1,4 +1,4 @@
-package com.ndhuy.authen.security.application.config;
+package com.ndhuy.authen.authentication.application.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.ndhuy.authen.security.application.LoadRSAKeys;
+import com.ndhuy.authen.authentication.application.rsa.LoadRSAKeys;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 

@@ -2,6 +2,8 @@ package com.ndhuy.authen.authentication.infrastructure.controller;
 
 import javax.annotation.Resource;
 
+import com.ndhuy.authen.authentication.application.domain.CreateUserCommand;
+import com.ndhuy.authen.authentication.application.domain.InfoUserCommand;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ndhuy.authen.authentication.application.domain.AuthenticationCommand;
 import com.ndhuy.authen.authentication.application.domain.JwtAuthenticationCommnad;
 import com.ndhuy.authen.authentication.infrastructure.presistence.AuthenticantionService;
-import com.ndhuy.authen.security.infrastructure.persistence.VerifySecurity;
+import com.ndhuy.authen.authentication.infrastructure.presistence.VerifySecurity;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -31,6 +33,10 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<JwtAuthenticationCommnad> postLogin(@RequestBody AuthenticationCommand command) {
         return ResponseEntity.ok(authenticantionService.authenticationLogin(command));
+    }
+    @PostMapping("/register")
+    public ResponseEntity<InfoUserCommand> postRegister(@RequestBody CreateUserCommand command){
+        return ResponseEntity.ok(authenticantionService.authenticationRegister(command));
     }
 
     @GetMapping("/check-auth")

@@ -2,6 +2,9 @@ package com.ndhuy.authen.authentication.infrastructure.presistence;
 
 import javax.annotation.Resource;
 
+import com.ndhuy.authen.authentication.application.domain.CreateUserCommand;
+import com.ndhuy.authen.authentication.application.domain.InfoUserCommand;
+import com.ndhuy.authen.users.infrastructure.communicate.UserCommunicateGrpc;
 import org.springframework.stereotype.Service;
 
 import com.ndhuy.authen.authentication.application.domain.AuthenticationCommand;
@@ -19,11 +22,19 @@ public class AuthenticantionService {
     @Resource
     UserJwt userJwt;
 
+    @Resource
+    UserCommunicateGrpc userCommunicateGrpc;
+
     public JwtAuthenticationCommnad authenticationLogin(AuthenticationCommand authenticationCommand) {
-        var token = userJwt.getJwt(authenticationCommand.usernameAndPassword());
-        var divece = authenticationCommand.divece();
-        registerDivices.registerDivice(divece, token.token(), token.uuid());
+        var token = userJwt.registerUserJwt(authenticationCommand.usernameAndPassword());
+        registerDivices.registerDivice(authenticationCommand.divece(), token.token(), token.uuid());
         return new JwtAuthenticationCommnad(token.token());
+    }
+
+    public InfoUserCommand authenticationRegister(CreateUserCommand userCommand){
+        var user =userCommunicateGrpc.register(userCommand);
+        return new InfoUserCommand(user.getUuid());
+
     }
 
 }

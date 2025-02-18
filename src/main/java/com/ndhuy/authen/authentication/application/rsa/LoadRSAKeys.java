@@ -1,4 +1,4 @@
-package com.ndhuy.authen.security.application;
+package com.ndhuy.authen.authentication.application.rsa;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -9,9 +9,11 @@ import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.interfaces.RSAPublicKey;
 
 import com.nimbusds.jose.jwk.RSAKey;
+import lombok.Getter;
 
 public class LoadRSAKeys {
 
+    @Getter
     private  static KeyPair keyPair;
 
     static {
@@ -39,10 +41,6 @@ public class LoadRSAKeys {
 
     public static PublicKey getPublicKey() {
         return keyPair.getPublic();
-    }
-
-    public static KeyPair getKeyPair() {
-        return keyPair;
     }
 
     public static RSAPublicKey getRSAPublicKey() {

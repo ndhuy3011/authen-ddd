@@ -9,6 +9,8 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import com.ndhuy.authen.users.domain.UserRepository;
+import com.ndhuy.authen.users.domain.Users;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -34,13 +36,20 @@ public class UserJwt {
     @Resource
     JwtDecoder jwtDecoder;
 
+    @Resource
+    private UserRepository userRepository;
 
-    public JwtCommand getJwt(UsernameAndPassword usernameAndPassword) {
+    public JwtCommand registerUserJwt(UsernameAndPassword usernameAndPassword) {
         var user = Optional.ofNullable(userCommunicateGrpc.authenticate(
                         usernameAndPassword.username(), usernameAndPassword.password()))
                 .orElseThrow(() -> new BadCredentialsException("Authen"));
         var uuid = UUID.fromString(user.getUuid());
-        return new JwtCommand(generatorJWT(uuid), uuid);
+        var jwt = generatorJWT(uuid);
+        userRepository.save(Users.builder()
+                .jwt(jwt)
+                .id(uuid)
+                .email(user.getEmail()).build());
+        return new JwtCommand(jwt, uuid);
     }
 
     public String generatorJWT(UUID uuid) {
