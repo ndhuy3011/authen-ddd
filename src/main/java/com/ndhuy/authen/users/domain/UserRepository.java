@@ -1,7 +1,10 @@
-package com.ndhuy.authen.users.domain;
+package com.ndhuy.user.users.domain;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
+import java.util.UUID;
 
-public interface UserRepository extends CrudRepository<Users, String> {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+public interface UserRepository  extends JpaRepository<User, UserNameId> {
+   Optional<User> findByUuid(UUID uuid);
 }
