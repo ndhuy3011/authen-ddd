@@ -25,6 +25,5 @@ public class RegisterDivices {
             .os(devices.os())
             .osVersion(devices.osVersion())
             .build());
-
     }
 }

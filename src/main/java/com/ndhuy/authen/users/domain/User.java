@@ -1,61 +1,49 @@
-package com.ndhuy.user.users.domain;
+package com.ndhuy.authen.users.domain;
 
-import java.util.UUID;
-
-import com.ndhuy.user.profiles.domain.valueobjects.Email;
-import com.ndhuy.user.profiles.domain.valueobjects.Name;
-import com.ndhuy.user.users.domain.valueobjects.NormarlClose;
-import com.ndhuy.user.users.domain.valueobjects.Password;
-import com.ndhuy.user.users.domain.valueobjects.Phone;
-
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
-import jakarta.persistence.Version;
+import com.ndhuy.authen.users.domain.valueobjects.*;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
-@Table(name = "u_user")
+@Table(name = "a_user")
 @Getter
 @Setter
 @NoArgsConstructor
 public class User {
 
     @EmbeddedId
-    @AttributeOverride(name = "username", column = @jakarta.persistence.Column(name = "username"))
+    @AttributeOverride(name = "username", column = @Column(name = "username"))
     UserNameId usernameId;
 
     @Column(name = "uuid", unique = true, nullable = false)
     UUID uuid;
 
     @Embedded
-    @AttributeOverride(name = "value", column = @jakarta.persistence.Column(name = "password"))
+    @AttributeOverride(name = "value", column = @Column(name = "password"))
     Password password;
 
     @Embedded
-    @AttributeOverride(name = "value", column = @jakarta.persistence.Column(name = "email"))
+    @AttributeOverride(name = "value", column = @Column(name = "email"))
     Email email;
 
     @Enumerated
-    @AttributeOverride(name = "value", column = @jakarta.persistence.Column(name = "status"))
+    @AttributeOverride(name = "value", column = @Column(name = "status"))
     NormarlClose status;
 
     String avatar;
 
     @Embedded
-    @AttributeOverride(name = "value", column = @jakarta.persistence.Column(name = "phone"))
+    @AttributeOverride(name = "value", column = @Column(name = "phone"))
     Phone phone;
 
     String address;
 
     @Embedded
-    @AttributeOverride(name = "value", column = @jakarta.persistence.Column(name = "name"))
+    @AttributeOverride(name = "value", column = @Column(name = "name"))
     Name fullName;
 
     @Version

@@ -3,15 +3,13 @@ package com.ndhuy.authen.users.infrastructure.persistence;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import com.ndhuy.authen.users.domain.UserRepository;
-import com.ndhuy.authen.users.domain.Users;
-import org.springframework.security.authentication.BadCredentialsException;
+import com.ndhuy.authen.users.domain.UserRedis;
+import com.ndhuy.authen.users.domain.UserRedisRepository;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -28,8 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserJwt {
 
-    @Resource
-    UserCommunicateGrpc userCommunicateGrpc;
+   
     @Resource
     JwtEncoder jwtEncoder;
 
@@ -37,15 +34,15 @@ public class UserJwt {
     JwtDecoder jwtDecoder;
 
     @Resource
-    private UserRepository userRepository;
+    private UserRedisRepository userRedisRepository;
 
     public JwtCommand registerUserJwt(UsernameAndPassword usernameAndPassword) {
-        var user = Optional.ofNullable(userCommunicateGrpc.authenticate(
-                        usernameAndPassword.username(), usernameAndPassword.password()))
-                .orElseThrow(() -> new BadCredentialsException("Authen"));
+        // var user = Optional.ofNullable(userCommunicateGrpc.authenticate(
+        //                 usernameAndPassword.username(), usernameAndPassword.password()))
+        //         .orElseThrow(() -> new NotFoundException("error.ERR004"));
         var uuid = UUID.fromString(user.getUuid());
         var jwt = generatorJWT(uuid);
-        userRepository.save(Users.builder()
+        userRedisRepository.save(UserRedis.builder()
                 .jwt(jwt)
                 .id(uuid)
                 .email(user.getEmail()).build());

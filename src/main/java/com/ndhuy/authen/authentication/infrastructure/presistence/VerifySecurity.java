@@ -22,11 +22,15 @@ public class VerifySecurity {
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             return false;
         }
-
         var jwt = authorizationHeader.substring(7);
-        return Optional.ofNullable(findUser.findUser(jwt))
-                .map(user -> userJwt.validateToken(jwt, user.getId()))
-                .orElse(false);
+        return verifyUser(jwt) && verifyDevice(jwt);
+
     }
 
+    private boolean verifyUser(String jwt){
+        return false;
+    }
+    private boolean verifyDevice(String jwt){
+        return false;
+    }
 }

@@ -2,6 +2,8 @@ package com.ndhuy.authen.users.domain;
 
 import java.util.UUID;
 
+import com.ndhuy.authen.users.domain.valueobjects.Email;
+import com.ndhuy.authen.users.domain.valueobjects.Phone;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.data.annotation.Id;
@@ -22,7 +24,7 @@ public class UserRedis {
 
     UUID id;
 
-    String email;
+    Email email;
 
-    String phone;
+    Phone phone;
 }

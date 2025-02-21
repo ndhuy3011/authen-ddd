@@ -1,4 +1,4 @@
-package com.ndhuy.user.users.domain.valueobjects;
+package com.ndhuy.authen.users.domain.valueobjects;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.BCryptVersion;
@@ -24,7 +24,6 @@ public record Password(String value) {
 
     /**
      * 
-     * @param value
      * @return Password
      */
     public static Password from(String value) {
@@ -33,7 +32,6 @@ public record Password(String value) {
 
     /**
      * 
-     * @param rawPassword
      * @return boolean
      */
     public boolean match(String rawPassword) {

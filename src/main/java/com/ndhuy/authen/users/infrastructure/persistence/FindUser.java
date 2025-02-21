@@ -2,21 +2,22 @@ package com.ndhuy.authen.users.infrastructure.persistence;
 
 import javax.annotation.Resource;
 
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.stereotype.Service;
-
-import com.ndhuy.authen.users.domain.UserRepository;
-import com.ndhuy.authen.users.domain.Users;
+import com.ndhuy.aspect.UserCase;
+import com.ndhuy.authen.users.domain.UserRedis;
+import com.ndhuy.authen.users.domain.UserRedisRepository;
+import com.ndhuy.exceptions.NotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+
+@UserCase
 @Slf4j
 public class FindUser {
     @Resource
-    private UserRepository userRepository;
-    public Users findUser(String jwt) {
+    private UserRedisRepository userRepository;
+
+    public UserRedis findUser(String jwt) {
         return userRepository.findById(jwt)
-                .orElseThrow(() -> new EntityNotFoundException("User not found for token: " + jwt));
+                .orElseThrow(() -> new NotFoundException("error.ERR005"));
     }
 }

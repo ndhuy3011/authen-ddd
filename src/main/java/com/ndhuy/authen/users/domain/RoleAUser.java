@@ -1,11 +1,11 @@
-package com.ndhuy.user.users.domain;
-
-import java.util.UUID;
+package com.ndhuy.authen.users.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @Getter
 @Setter

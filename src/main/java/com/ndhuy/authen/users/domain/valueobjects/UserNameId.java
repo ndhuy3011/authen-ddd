@@ -1,4 +1,4 @@
-package com.ndhuy.authen.users.domain;
+package com.ndhuy.authen.users.domain.valueobjects;
 
 
 import com.ndhuy.exceptions.BadRequestException;

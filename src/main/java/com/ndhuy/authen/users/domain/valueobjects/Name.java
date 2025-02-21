@@ -1,4 +1,4 @@
-package com.ndhuy.user.profiles.domain.valueobjects;
+package com.ndhuy.authen.users.domain.valueobjects;
 
 public record Name(String value) {
     public Name {

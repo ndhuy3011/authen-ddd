@@ -1,4 +1,4 @@
-package com.ndhuy.user.users.domain;
+package com.ndhuy.authen.users.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "u_role")
+@Table(name = "a_role")
 @Getter
 @Setter
 @NoArgsConstructor

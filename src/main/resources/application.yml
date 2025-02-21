@@ -8,7 +8,13 @@ spring:
     port: 6379
   main:
       allow-bean-definition-overriding: true
-
+  datasource:
+    url: jdbc:postgresql://localhost:54321/auth
+    username: postgres
+    password: user123
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 grpc:
     client:

@@ -1,4 +1,4 @@
-package com.ndhuy.user.users.domain.valueobjects;
+package com.ndhuy.authen.users.domain.valueobjects;
 
 public record Phone(String phone) {
     public Phone {
