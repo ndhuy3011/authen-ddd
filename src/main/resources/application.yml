@@ -15,7 +15,18 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: profile-client
+            client-secret: YTrPzXkgOLW0tZ4UC2esYvo40x07GOZX # Nếu Access Type là confidential, lấy từ tab Credentials trong Keycloak
+            authorization-grant-type: authorization_code
+            scope: openid,profile,email
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:6969/realms/Web-realm
 grpc:
     client:
         user-service:
