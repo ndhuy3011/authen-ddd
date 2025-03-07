@@ -20,13 +20,13 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: profile-client
-            client-secret: YTrPzXkgOLW0tZ4UC2esYvo40x07GOZX # Nếu Access Type là confidential, lấy từ tab Credentials trong Keycloak
+            client-id: authentication-service-app
+            client-secret: thBlubso0Q5K08nxYpxUw0D8haYOnPYp
             authorization-grant-type: authorization_code
             scope: openid,profile,email
         provider:
           keycloak:
-            issuer-uri: http://localhost:6969/realms/Web-realm
+            issuer-uri: http://localhost:6969/realms/authentication-realm
 grpc:
     client:
         user-service:

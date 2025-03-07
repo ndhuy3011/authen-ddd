@@ -34,10 +34,10 @@ public class AuthenticationController {
     public ResponseEntity<JwtAuthenticationCommnad> postLogin(@RequestBody AuthenticationCommand command) {
         return ResponseEntity.ok(authenticantionService.authenticationLogin(command));
     }
-    @PostMapping("/register")
-    public ResponseEntity<InfoUserCommand> postRegister(@RequestBody CreateUserCommand command){
-        return ResponseEntity.ok(authenticantionService.authenticationRegister(command));
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<InfoUserCommand> postRegister(@RequestBody CreateUserCommand command){
+//        return ResponseEntity.ok(authenticantionService.authenticationRegister(command));
+//    }
 
     @GetMapping("/check-auth")
     public ResponseEntity<HttpStatusCode> checkAuth(HttpServletRequest request) {

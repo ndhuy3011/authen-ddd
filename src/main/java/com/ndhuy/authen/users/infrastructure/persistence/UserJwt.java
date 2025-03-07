@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import com.ndhuy.authen.users.domain.User;
 import com.ndhuy.authen.users.domain.UserRedis;
 import com.ndhuy.authen.users.domain.UserRedisRepository;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import com.ndhuy.authen.users.application.command.JwtCommand;
 import com.ndhuy.authen.users.application.command.UsernameAndPassword;
-import com.ndhuy.authen.users.infrastructure.communicate.UserCommunicateGrpc;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,10 +37,8 @@ public class UserJwt {
     private UserRedisRepository userRedisRepository;
 
     public JwtCommand registerUserJwt(UsernameAndPassword usernameAndPassword) {
-        // var user = Optional.ofNullable(userCommunicateGrpc.authenticate(
-        //                 usernameAndPassword.username(), usernameAndPassword.password()))
-        //         .orElseThrow(() -> new NotFoundException("error.ERR004"));
-        var uuid = UUID.fromString(user.getUuid());
+        var user = new User();
+        var uuid = UUID.fromString(String.valueOf(user.getUuid()));
         var jwt = generatorJWT(uuid);
         userRedisRepository.save(UserRedis.builder()
                 .jwt(jwt)
